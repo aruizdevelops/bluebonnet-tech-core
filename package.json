@@ -1,0 +1,33 @@
+{
+  "name": "@bluebonnet-tech/core",
+  "version": "0.1.0",
+  "private": true,
+  "main": "./src/index.js",
+  "files": [
+    "src"
+  ],
+  "exports": {
+    ".": "./src/index.js",
+    "./theme": "./src/theme/index.js",
+    "./components": "./src/components/index.js",
+    "./providers": "./src/providers/index.js",
+    "./hooks": "./src/hooks/index.js",
+    "./constants": "./src/constants/index.js"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@emotion/cache": "^11.14.0",
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
+    "@mui/icons-material": "^7.3.9",
+    "@mui/material": "^7.3.9",
+    "@mui/material-nextjs": "^7.3.9",
+    "next": "16.2.1",
+    "react": "19.2.4",
+    "react-dom": "19.2.4"
+  }
+}
