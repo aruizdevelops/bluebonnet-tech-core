@@ -1,90 +1,119 @@
 'use client';
 
-import { Box, Typography, Button, Card, CardContent, Grid, Chip, Stack } from '@mui/material';
-import RocketLaunchIcon from '@mui/icons-material/RocketLaunch';
+import { Box, Typography, Card, CardContent, Stack, Chip, Divider } from '@mui/material';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import ScheduleIcon from '@mui/icons-material/Schedule';
 import { TenantProvider } from '../src/providers/TenantProvider';
 import { CoreThemeProvider } from '../src/providers/CoreThemeProvider';
-import { AppShell } from '../src/components/layout/AppShell';
 import { PageContainer } from '../src/components/common/PageContainer';
 import { StatusChip } from '../src/components/common/StatusChip';
+import { Logo } from '../src/components/common/Logo';
+import { CORE_VERSION } from '../src/constants';
 
-const stats = [
-  { label: 'Total Users', value: '12,847', change: '+14%' },
-  { label: 'Revenue', value: '$84.2K', change: '+8.3%' },
-  { label: 'Active Now', value: '342', change: '+23%' },
-  { label: 'Conversion', value: '3.6%', change: '+1.2%' },
+const componentGroups = [
+  {
+    category: 'Layout',
+    items: [
+      { name: 'AppShell', status: 'active', description: 'Admin layout with sidebar + topbar' },
+    ],
+  },
+  {
+    category: 'Navigation',
+    items: [
+      { name: 'TopBar', status: 'active', description: 'App bar with menu toggle and actions' },
+      { name: 'Sidebar', status: 'active', description: 'Responsive drawer navigation' },
+    ],
+  },
+  {
+    category: 'Common',
+    items: [
+      { name: 'Logo', status: 'active', description: 'Tenant-aware logo (image or text fallback)' },
+      { name: 'PageContainer', status: 'active', description: 'Page wrapper with title and subtitle' },
+      { name: 'StatusChip', status: 'active', description: 'Color-coded status indicator' },
+    ],
+  },
+  {
+    category: 'Providers',
+    items: [
+      { name: 'TenantProvider', status: 'active', description: 'Tenant config context' },
+      { name: 'CoreThemeProvider', status: 'active', description: 'MUI theme from tenant config' },
+    ],
+  },
+  {
+    category: 'Hooks',
+    items: [
+      { name: 'useLocalStorage', status: 'active', description: 'Persistent state in localStorage' },
+    ],
+  },
+  {
+    category: 'Planned',
+    items: [
+      { name: 'LandingShell', status: 'pending', description: 'Public-facing layout wrapper' },
+      { name: 'StepperFlow', status: 'pending', description: 'Multi-step workflow shell' },
+      { name: 'FormField', status: 'pending', description: 'Labeled input wrapper' },
+      { name: 'FormSection', status: 'pending', description: 'Fieldset grouping' },
+      { name: 'useStepperFlow', status: 'pending', description: 'Step state management hook' },
+    ],
+  },
 ];
 
 export default function Home() {
   return (
     <TenantProvider>
       <CoreThemeProvider>
-        <AppShell>
-          <PageContainer
-            title="Dashboard"
-            subtitle="Welcome back. Here's what's happening today."
-          >
-            <Grid container spacing={3} sx={{ mb: 4 }}>
-              {stats.map((stat) => (
-                <Grid size={{ xs: 12, sm: 6, md: 3 }} key={stat.label}>
-                  <Card>
-                    <CardContent>
-                      <Typography variant="overline" color="text.secondary">
-                        {stat.label}
-                      </Typography>
-                      <Typography variant="h3" sx={{ my: 1 }}>
-                        {stat.value}
-                      </Typography>
-                      <Chip
-                        label={stat.change}
-                        size="small"
-                        color="success"
-                        variant="outlined"
-                      />
-                    </CardContent>
-                  </Card>
-                </Grid>
-              ))}
-            </Grid>
+        <Box sx={{ minHeight: '100vh', bgcolor: 'background.default', p: 4 }}>
+          <Stack spacing={1} sx={{ mb: 4 }}>
+            <Logo size="large" />
+            <Typography variant="body1" color="text.secondary">
+              Core Dev Playground &mdash; v{CORE_VERSION}
+            </Typography>
+          </Stack>
 
-            <Card sx={{ mb: 3 }}>
-              <CardContent sx={{ p: 4 }}>
-                <Stack direction="row" alignItems="center" spacing={2} sx={{ mb: 2 }}>
-                  <RocketLaunchIcon color="primary" />
-                  <Typography variant="h4">Getting Started</Typography>
-                </Stack>
-                <Typography variant="body1" color="text.secondary" sx={{ mb: 3 }}>
-                  This is the Bluebonnet Tech core platform. Use this preview to develop
-                  and refine shared components before publishing to tenant apps.
-                </Typography>
-                <Stack direction="row" spacing={2}>
-                  <Button variant="contained" color="primary">
-                    View Components
-                  </Button>
-                  <Button variant="outlined" color="primary">
-                    Theme Preview
-                  </Button>
-                </Stack>
-              </CardContent>
-            </Card>
+          <Stack spacing={3}>
+            {componentGroups.map((group) => (
+              <Card key={group.category}>
+                <CardContent sx={{ p: 3 }}>
+                  <Typography variant="h6" sx={{ mb: 2 }}>
+                    {group.category}
+                  </Typography>
+                  <Stack spacing={1.5} divider={<Divider />}>
+                    {group.items.map((item) => (
+                      <Stack
+                        key={item.name}
+                        direction="row"
+                        alignItems="center"
+                        justifyContent="space-between"
+                      >
+                        <Stack direction="row" alignItems="center" spacing={1.5}>
+                          {item.status === 'active' ? (
+                            <CheckCircleIcon color="success" fontSize="small" />
+                          ) : (
+                            <ScheduleIcon color="warning" fontSize="small" />
+                          )}
+                          <Box>
+                            <Typography variant="subtitle2">{item.name}</Typography>
+                            <Typography variant="caption" color="text.secondary">
+                              {item.description}
+                            </Typography>
+                          </Box>
+                        </Stack>
+                        <StatusChip
+                          status={item.status}
+                          label={item.status === 'active' ? 'Ready' : 'Planned'}
+                        />
+                      </Stack>
+                    ))}
+                  </Stack>
+                </CardContent>
+              </Card>
+            ))}
+          </Stack>
 
-            <Card>
-              <CardContent sx={{ p: 4 }}>
-                <Typography variant="h4" gutterBottom>
-                  Component Status
-                </Typography>
-                <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap>
-                  <StatusChip status="active" label="AppShell – Ready" />
-                  <StatusChip status="active" label="TopBar – Ready" />
-                  <StatusChip status="active" label="Sidebar – Ready" />
-                  <StatusChip status="active" label="Logo – Ready" />
-                  <StatusChip status="pending" label="Auth – Placeholder" />
-                  <StatusChip status="pending" label="DataTable – Planned" />
-                </Stack>
-              </CardContent>
-            </Card>
-          </PageContainer>
-        </AppShell>
+          <Typography variant="caption" color="text.secondary" sx={{ display: 'block', mt: 4 }}>
+            This playground is for developing and previewing core components.
+            It is not part of the published package.
+          </Typography>
+        </Box>
       </CoreThemeProvider>
     </TenantProvider>
   );
