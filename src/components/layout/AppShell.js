@@ -27,7 +27,9 @@ export function AppShell({ children, navItems, topBarActions }) {
         component="main"
         sx={{
           flexGrow: 1,
-          width: { md: `calc(100% - ${DRAWER_WIDTH}px)` },
+          width: { xs: '100%', md: `calc(100% - ${DRAWER_WIDTH}px)` },
+          minWidth: 0,
+          overflow: 'hidden',
         }}
       >
         <Toolbar />
