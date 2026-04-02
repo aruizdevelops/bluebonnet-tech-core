@@ -33,6 +33,7 @@ export function Logo({ size = 'medium', ...props }) {
   return (
     <Typography
       variant="h6"
+      noWrap
       sx={{
         fontSize,
         fontWeight: 800,
