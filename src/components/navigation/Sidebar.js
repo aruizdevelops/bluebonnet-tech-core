@@ -10,24 +10,12 @@ import {
   Toolbar,
   Box,
 } from '@mui/material';
-import DashboardIcon from '@mui/icons-material/Dashboard';
-import PeopleIcon from '@mui/icons-material/People';
-import SettingsIcon from '@mui/icons-material/Settings';
-import BarChartIcon from '@mui/icons-material/BarChart';
-
-const DRAWER_WIDTH = 260;
-
-const defaultNavItems = [
-  { label: 'Dashboard', icon: <DashboardIcon />, path: '/' },
-  { label: 'Analytics', icon: <BarChartIcon />, path: '/analytics' },
-  { label: 'Users', icon: <PeopleIcon />, path: '/users' },
-  { label: 'Settings', icon: <SettingsIcon />, path: '/settings' },
-];
+import { DRAWER_WIDTH } from '../../constants';
 
 export function Sidebar({
   open = true,
   onClose,
-  navItems = defaultNavItems,
+  navItems = [],
   activePath = '/',
   variant = 'permanent',
   ...props
