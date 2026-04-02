@@ -22,7 +22,7 @@ export function Sidebar({
 }) {
   const drawerContent = (
     <Box sx={{ overflow: 'auto' }}>
-      <Toolbar />
+      <Toolbar sx={{ mt: 'env(safe-area-inset-top, 0px)' }} />
       <List sx={{ px: 1, pt: 1 }}>
         {navItems.map((item) => (
           <ListItem key={item.label} disablePadding sx={{ mb: 0.5 }}>
