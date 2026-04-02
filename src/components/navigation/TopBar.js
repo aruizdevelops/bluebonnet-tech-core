@@ -21,14 +21,14 @@ export function TopBar({ onMenuToggle, actions, ...props }) {
             color="inherit"
             edge="start"
             onClick={onMenuToggle}
-            sx={{ display: { md: 'none' } }}
+            sx={{ display: { md: 'none' }, flexShrink: 0 }}
           >
             <MenuIcon />
           </IconButton>
         )}
-        <Logo />
+        <Logo sx={{ minWidth: 0 }} />
         <Box sx={{ flexGrow: 1 }} />
-        {actions}
+        <Box sx={{ flexShrink: 0, whiteSpace: 'nowrap' }}>{actions}</Box>
         <Avatar sx={{ width: 32, height: 32, bgcolor: 'primary.main', fontSize: '0.875rem' }}>
           U
         </Avatar>
