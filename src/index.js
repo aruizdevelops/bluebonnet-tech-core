@@ -27,6 +27,7 @@ export {
   About,
   Benefits,
   Process,
+  Pricing,
   Testimonials,
   CtaBanner,
   Footer,

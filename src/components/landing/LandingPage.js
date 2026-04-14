@@ -7,6 +7,7 @@ import Services from './Services';
 import About from './About';
 import Benefits from './Benefits';
 import Process from './Process';
+import Pricing from './Pricing';
 import Testimonials from './Testimonials';
 import CtaBanner from './CtaBanner';
 import Footer from './Footer';
@@ -48,6 +49,7 @@ export default function LandingPage({ content, iconMaps, socialIcons }) {
         <About content={content.ABOUT} />
         <Benefits content={content.BENEFITS} iconMap={iconMaps?.benefits} />
         <Process content={content.PROCESS} />
+        {content.PRICING && <Pricing content={content.PRICING} />}
         <Testimonials content={content.TESTIMONIALS} />
         <CtaBanner content={content.CTA} />
       </main>

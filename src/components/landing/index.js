@@ -4,6 +4,7 @@ export { default as Services } from './Services';
 export { default as About } from './About';
 export { default as Benefits } from './Benefits';
 export { default as Process } from './Process';
+export { default as Pricing } from './Pricing';
 export { default as Testimonials } from './Testimonials';
 export { default as CtaBanner } from './CtaBanner';
 export { default as Footer } from './Footer';
